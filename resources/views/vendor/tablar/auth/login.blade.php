@@ -4,55 +4,66 @@
 
 @section('content')
 <style>
-    /* Personalizando el fondo y los colores con una paleta educativa */
+    /* Mejoras generales en el estilo */
     body, html {
         margin: 0;
         padding: 0;
-        /* Añadir un fondo sutil */
-        background: url('https://example.com/path-to-your-background-image.jpg') no-repeat center center fixed;
-        background-size: cover;
+        background: #f0f2f5; /* Un fondo más neutral */
     }
 
+    /* Estilo específico para la tarjeta */
     .card-md {
-        background-color: rgba(255, 255, 255, 0.8); /* Semi-transparente para que se note el fondo */
-        border-radius: 10px; /* Bordes redondeados para un aspecto más suave */
-        box-shadow: 0 4px 6px rgba(0,0,0,0.1); /* Sombra sutil para mejorar la legibilidad */
-        transition: transform 0.3s ease-in-out;
+        background-color: #fff;
+        border-radius: 10px;
+        box-shadow: 0 10px 25px rgba(0,0,0,0.05);
+        transition: box-shadow 0.3s ease-in-out;
+    }
+    .card-md:hover {
+        box-shadow: 0 15px 30px rgba(0,0,0,0.1);
     }
 
+    /* Estilos para los botones */
     .btn-primary {
-        background-color: #4caf50; /* Un verde más suave */
-        border-color: #4caf50;
+        background-image: linear-gradient(45deg, #667eea, #764ba2);
+        border: 0;
+        box-shadow: 0 4px 6px rgba(50,50,93,.11), 0 1px 3px rgba(0,0,0,.08);
+        transition: all 0.3s ease;
     }
-
     .btn-primary:hover {
-        background-color: #43a047;
-        border-color: #43a047;
-        transform: scale(1.05); /* Efecto de hover con transformación */
+        transform: translateY(-2px);
+        box-shadow: 0 7px 14px rgba(50,50,93,.1), 0 3px 6px rgba(0,0,0,.08);
     }
 
+    /* Estilos para los inputs */
+    .form-control {
+        border: 1px solid #e3e3e3;
+        transition: border-color 0.3s ease;
+    }
     .form-control:focus {
-        border-color: #66afe9;
-        box-shadow: 0 0 0 0.2rem rgba(100, 149, 237, .25);
+        border-color: #667eea;
+        box-shadow: 0 1px 3px rgba(102, 126, 234, 0.3);
     }
 
+    /* Animación para enfocar la atención */
     @keyframes fadeIn {
-        from {
-            opacity: 0;
-        }
-        to {
-            opacity: 1;
-        }
+        from { opacity: 0; }
+        to { opacity: 1; }
     }
-
     .container-tight {
         animation: fadeIn 1s ease-in-out;
+    }
+
+    /* Personalización del mensaje de error */
+    .invalid-feedback {
+        color: #ff3860;
     }
 </style>
 
 <div class="container container-tight py-4">
     <div class="text-center mb-1 mt-5">
-        
+        <a href="" class="navbar-brand navbar-brand-autodark">
+            <img src="{{ asset(config('tablar.auth_logo.img.path', 'assets/logo.svg')) }}" height="36" alt="">
+        </a>
     </div>
     <div class="card card-md">
         <div class="card-body">
@@ -62,7 +73,7 @@
                 <div class="mb-3">
                     <label class="form-label">Dirección de correo electrónico</label>
                     <input type="email" class="form-control @error('email') is-invalid @enderror" name="email"
-                           placeholder="correo@mail.com" autocomplete="off">
+                           placeholder="tu@correo.com" autocomplete="off">
                     @error('email')
                     <div class="invalid-feedback">{{ $message }}</div>
                     @enderror
